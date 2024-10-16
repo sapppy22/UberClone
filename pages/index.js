@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import tw from "tailwind-styled-components";
-import Map from "./Components/Map"; // Ensure correct casing
+import Map from "./Components/Map";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -16,10 +17,12 @@ export default function Home() {
           </Profile>
         </Header>
         <ActionButtons>
-          <ActionButton>
-            <ActionButtonImage src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_465,w_698/v1649230978/assets/a2/553a18-2f77-4722-a4ba-f736f4cb405e/original/Uber_Moto_Orange_558x372_pixels_Desktop.png" />
-            Moto
-          </ActionButton>
+          <Link href="/search">
+            <ActionButton>
+              <ActionButtonImage src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_465,w_698/v1649230978/assets/a2/553a18-2f77-4722-a4ba-f736f4cb405e/original/Uber_Moto_Orange_558x372_pixels_Desktop.png" />
+              Moto
+            </ActionButton>
+          </Link>
           <ActionButton>
             <ActionButtonImage src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_538,w_956/v1688398971/assets/29/fbb8b0-75b1-4e2a-8533-3a364e7042fa/original/UberSelect-White.png " />
             Trip
@@ -33,6 +36,7 @@ export default function Home() {
             Reserve
           </ActionButton>
         </ActionButtons>
+        <InputButton>Where to?</InputButton>
       </ActionItems>
     </Wrapper>
   );
@@ -71,9 +75,13 @@ flex
 `;
 
 const ActionButton = tw.div`
- flex bg-gray-200 flex-1 m-1 h-32 items-center flex-col justify-center rounded-lg
+ flex bg-gray-200 flex-1 m-1 h-32 items-center flex-col justify-center rounded-lg transform hover:scale-105 text-xl
 `;
 
 const ActionButtonImage = tw.img`
 
 h-3/5`;
+
+const InputButton = tw.div`
+h-20 bg-gray-200 text-2xl p-4 flex items-center mt-8
+`;
