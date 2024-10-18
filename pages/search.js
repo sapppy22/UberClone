@@ -1,10 +1,18 @@
-import React from "react";
+import { useState } from "react";
 import tw from "tailwind-styled-components";
+import Link from "next/link";
+
 const search = () => {
+  const [pickup, setPickup] = useState("");
+  const [dropoff, setDropoff] = useState("");
+  console.log(pickup);
+  console.log(dropoff);
   return (
     <Wrapper>
       <ButtonContainer>
-        <BackButton src="https://img.icons8.com/ios-filled/50/000000/left.png" />
+        <Link href="/">
+          <BackButton src="https://img.icons8.com/ios-filled/50/000000/left.png" />
+        </Link>
       </ButtonContainer>
       <TextContainer>Plan your ride</TextContainer>
       <Boxcontainer>
@@ -24,8 +32,16 @@ const search = () => {
           <Square src="https://static.vecteezy.com/system/resources/previews/011/888/167/non_2x/neumorphic-square-button-free-png.png" />
         </FromToIcons>
         <InputBoxes>
-          <Input placeholder="Enter pickup location" />
-          <Input placeholder="Where to?" />
+          <Input
+            placeholder="Enter pickup location"
+            value={pickup}
+            onChange={(e) => setPickup(e.target.value)}
+          />
+          <Input
+            placeholder="Where to?"
+            value={dropoff}
+            onChange={(e) => setDropoff(e.target.value)}
+          />
         </InputBoxes>
         <PlusIcon src="https://img.icons8.com/ios-filled/50/000000/plus-math.png" />
       </InputContainer>
@@ -37,7 +53,17 @@ const search = () => {
         <HomeIcon src="https://img.icons8.com/ios-filled/50/ffffff/home--v1.png" />
         Home
       </Home>
-      <Confirm>Confirm Location</Confirm>
+      <Link
+        href={{
+          pathname: "/confirm",
+          query: {
+            pickup: pickup,
+            dropoff: dropoff,
+          },
+        }}
+      >
+        <Confirm>Confirm Location</Confirm>
+      </Link>
     </Wrapper>
   );
 };
@@ -53,7 +79,7 @@ const ButtonContainer = tw.div`
 `;
 
 const BackButton = tw.img`
-h-12
+h-12 cursor-pointer
 `;
 
 const FromToIcons = tw.div`
@@ -103,7 +129,7 @@ const HomeIcon = tw.img`
 bg-gray-800 w-10 h-10 p-2 rounded-full mr-2
 `;
 const TextContainer = tw.div`
-bg-white text-center  text-xl
+bg-white text-center  text-2xl
 `;
 
 const Boxcontainer = tw.div`
@@ -125,5 +151,5 @@ bg-gray-800 w-6 h-6 mx-2 rouned-full
 `;
 
 const Confirm = tw.div`
-bg-gray-800 text-white text-center px-4 py-2 mx-64
+bg-black text-white text-center mt-2 px-4 py-3 mx-4 text-2xl cursor-pointer
 `;
